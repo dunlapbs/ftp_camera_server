@@ -1,0 +1,24 @@
+# Git
+.git/
+.gitignore
+
+# Docker
+docker-compose.yml
+
+# Environment
+.env
+.env.example
+
+# Documentation
+README.md
+
+# Camera uploads
+camera_uploads/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/

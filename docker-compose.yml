@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  ftp-camera-server:
+    build: .
+    container_name: ftp-camera-server
+    restart: unless-stopped
+
+    # Port mapping - FTP control and passive ports
+    ports:
+      - "${FTP_PORT:-21}:21"          # FTP control port
+      - "21100-21110:21100-21110"     # FTP passive mode ports
+
+    # Mount camera uploads directory
+    volumes:
+      - ${UPLOADS_DIRECTORY:-./camera_uploads}:/var/ftp/camera_uploads
+
+    # Environment variables
+    environment:
+      - FTP_USER=${FTP_USER:-ftpuser}
+      - FTP_PASSWORD=${FTP_PASSWORD:-camera123}
+
+    # Optional: Use .env file
+    env_file:
+      - .env
+
+    # Logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
