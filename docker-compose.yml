@@ -6,10 +6,8 @@ services:
     container_name: ftp-camera-server
     restart: unless-stopped
 
-    # Port mapping - FTP control and passive ports
-    ports:
-      - "${FTP_PORT:-21}:21"          # FTP control port
-      - "21100-21110:21100-21110"     # FTP passive mode ports
+    # Use host network mode for FTP passive mode compatibility
+    network_mode: host
 
     # Mount camera uploads directory
     volumes:

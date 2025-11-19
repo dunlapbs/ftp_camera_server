@@ -18,7 +18,11 @@ chown -R $FTP_USER:$FTP_USER /var/ftp/camera_uploads
 # Create vsftpd secure chroot directory
 mkdir -p /var/run/vsftpd/empty
 
+# Note: With host network mode, vsftpd will automatically use the host's IP
+
 # Start vsftpd in foreground
 echo "Starting FTP server on port 21..."
 echo "Passive ports: 21100-21110"
-exec /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf
+
+# Run vsftpd without backgrounding
+exec /usr/sbin/vsftpd /etc/vsftpd.conf
